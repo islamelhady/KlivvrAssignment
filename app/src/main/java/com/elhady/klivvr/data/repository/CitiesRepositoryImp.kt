@@ -4,8 +4,9 @@ import com.elhady.klivvr.data.data_source.CitiesDataSource
 import com.elhady.klivvr.data.model.toCity
 import com.elhady.klivvr.domain.repository.CitiesRepository
 import com.elhady.klivvr.domain.model.City
+import javax.inject.Inject
 
-class CitiesRepositoryImp(private val citiesLocalData: CitiesDataSource) : CitiesRepository {
+class CitiesRepositoryImp @Inject constructor(private val citiesLocalData: CitiesDataSource) : CitiesRepository {
     override suspend fun getCities(): List<City> {
         return citiesLocalData.getCitiesFromSource().map { it.toCity() }
     }

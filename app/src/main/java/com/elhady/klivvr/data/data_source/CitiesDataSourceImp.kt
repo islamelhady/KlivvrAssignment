@@ -5,13 +5,14 @@ import android.util.Log
 import com.elhady.klivvr.R
 import com.elhady.klivvr.data.model.CityDto
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
 /**
  * Implementation of the CitiesLocalData interface that provides local data access for cities.
  *
  * @property context The context used to access resources.
  */
-class CitiesDataSourceImp(private val context: Context) : CitiesDataSource {
+class CitiesDataSourceImp @Inject constructor(private val context: Context) : CitiesDataSource {
 
     /**
      * Retrieves all cities from a local JSON file.

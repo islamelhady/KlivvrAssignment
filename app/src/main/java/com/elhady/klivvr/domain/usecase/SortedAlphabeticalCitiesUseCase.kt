@@ -2,8 +2,9 @@ package com.elhady.klivvr.domain.usecase
 
 import com.elhady.klivvr.domain.model.City
 import com.elhady.klivvr.domain.repository.CitiesRepository
+import javax.inject.Inject
 
-class SortedAlphabeticalCitiesUseCase(private val citiesRepository: CitiesRepository) {
+class SortedAlphabeticalCitiesUseCase @Inject constructor(private val citiesRepository: CitiesRepository) {
     suspend fun invoke(): List<City> {
         /**
          * The requirements says that the list should be sorted alphabetically,
