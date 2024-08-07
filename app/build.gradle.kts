@@ -50,8 +50,10 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.navigation.ui.ktx)
 
-    // hilt
+    // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 

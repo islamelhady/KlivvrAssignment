@@ -27,7 +27,7 @@ class CitiesDataSourceImp @Inject constructor(private val context: Context) : Ci
         return try {
             val jsonString = context.resources.openRawResource(R.raw.cities).bufferedReader().readText()
             val json = Json { ignoreUnknownKeys = true }
-            Log.e(TAG, "json: $jsonString")
+            Log.e(TAG, "json: ${jsonString.length}")
             return json.decodeFromString<List<CityDto>>(jsonString)
         } catch (e: Exception) {
             Log.e(TAG, "Error loading cities", e)

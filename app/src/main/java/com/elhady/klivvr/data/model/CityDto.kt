@@ -1,8 +1,9 @@
 package com.elhady.klivvr.data.model
 
 import com.elhady.klivvr.domain.model.City
+import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class CityDto(
     val country: String,
     val name: String,
