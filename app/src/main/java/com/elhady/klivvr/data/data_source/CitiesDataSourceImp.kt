@@ -3,7 +3,7 @@ package com.elhady.klivvr.data.data_source
 import android.content.Context
 import android.util.Log
 import com.elhady.klivvr.R
-import com.elhady.klivvr.data.model.City
+import com.elhady.klivvr.data.model.CityDto
 import kotlinx.serialization.json.Json
 
 /**
@@ -22,12 +22,12 @@ class CitiesDataSourceImp(private val context: Context) : CitiesDataSource {
      *
      * @return A list of CityEntity objects representing the cities.
      */
-    override suspend fun getCitiesFromSource(): List<City> {
+    override suspend fun getCitiesFromSource(): List<CityDto> {
         return try {
             val jsonString = context.resources.openRawResource(R.raw.cities).bufferedReader().readText()
             val json = Json { ignoreUnknownKeys = true }
             Log.e(TAG, "json: $jsonString")
-            return json.decodeFromString<List<City>>(jsonString)
+            return json.decodeFromString<List<CityDto>>(jsonString)
         } catch (e: Exception) {
             Log.e(TAG, "Error loading cities", e)
             e.printStackTrace()

@@ -1,4 +1,4 @@
-package com.elhady.klivvr.data.model
+package com.elhady.klivvr.domain.model
 
 data class Coordinates(
     val lat: Double,
