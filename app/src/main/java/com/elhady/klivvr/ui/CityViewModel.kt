@@ -5,12 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elhady.klivvr.domain.usecase.SortedAlphabeticalCitiesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CityViewModel @Inject constructor(private val sortedAlphabeticalCitiesUseCase: SortedAlphabeticalCitiesUseCase): ViewModel() {
+
+    private val _state = MutableStateFlow(CityUiState())
+    val state = _state.asStateFlow()
 
 
     init {
@@ -19,7 +24,10 @@ class CityViewModel @Inject constructor(private val sortedAlphabeticalCitiesUseC
     private fun getCitiesByName(){
         viewModelScope.launch {
             val cityList = sortedAlphabeticalCitiesUseCase
-            Log.d(TAG, "getCitiesSize: ${cityList.invoke().size}")
+            _state.update {
+                it.copy(cities = sortedAlphabeticalCitiesUseCase())
+            }
+            Log.d(TAG, "getCity: ${cityList.invoke()[8]}")
         }
     }
     companion object{

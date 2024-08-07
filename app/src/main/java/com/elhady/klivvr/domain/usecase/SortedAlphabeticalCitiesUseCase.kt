@@ -5,7 +5,7 @@ import com.elhady.klivvr.domain.repository.CitiesRepository
 import javax.inject.Inject
 
 class SortedAlphabeticalCitiesUseCase @Inject constructor(private val citiesRepository: CitiesRepository) {
-    suspend fun invoke(): List<City> {
+    suspend operator fun invoke(): List<City> {
         /**
          * The requirements says that the list should be sorted alphabetically,
          * city name then country, and case is insensitive.
