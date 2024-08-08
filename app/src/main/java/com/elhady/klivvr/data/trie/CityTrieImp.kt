@@ -1,20 +1,11 @@
-package com.elhady.klivvr.data
+package com.elhady.klivvr.data.trie
 
 import com.elhady.klivvr.domain.model.City
 
-class TrieNode {
-
-
-    val children = mutableMapOf<Char, TrieNode>()
-    var isEndOfWord = false
-    val cities = mutableListOf<City>()
-
-}
-
-class CityTrie() {
+class CityTrieImp: CityTrie {
     private val root = TrieNode()
 
-    private fun insert(word: String, city: City) {
+    override fun insert(word: String, city: City) {
         var node = root
         for (char in word) {
             node = node.children.computeIfAbsent(char) { TrieNode() }
@@ -24,14 +15,13 @@ class CityTrie() {
     }
 
 
-    fun insertCities(cities: List<City>) {
+    override fun insertCities(cities: List<City>) {
         for (city in cities) {
             insert(city.name.lowercase(), city)
         }
     }
 
-
-    fun startsWithPrefix(prefix: String): List<City> {
+    override fun startsWithPrefix(prefix: String): List<City> {
         var node = root
         for (char in prefix) {
             node = node.children[char] ?: return emptyList()
@@ -39,7 +29,7 @@ class CityTrie() {
         return collectCities(node)
     }
 
-    private fun collectCities(node: TrieNode): List<City> {
+    override fun collectCities(node: TrieNode): List<City> {
         val result = mutableListOf<City>()
         if (node.isEndOfWord) {
             result.addAll(node.cities)

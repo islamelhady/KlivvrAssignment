@@ -1,8 +1,11 @@
 package com.elhady.klivvr.di
 
 import android.content.Context
+import com.elhady.klivvr.data.trie.CityTrie
+import com.elhady.klivvr.data.trie.CityTrieImp
 import com.elhady.klivvr.data.data_source.CitiesDataSource
 import com.elhady.klivvr.data.data_source.CitiesDataSourceImp
+import com.elhady.klivvr.data.trie.TrieNode
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +32,12 @@ object DataSourceModule {
     @Provides
     fun provideCityDataSource(@ApplicationContext context: Context): CitiesDataSource {
         return CitiesDataSourceImp(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTrie(): CityTrie {
+        return CityTrieImp()
     }
 
 }
