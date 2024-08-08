@@ -7,7 +7,9 @@ import com.elhady.klivvr.domain.model.City
 import com.elhady.klivvr.domain.usecase.FilterCitiesUseCase
 import com.elhady.klivvr.domain.usecase.SortedAlphabeticalCitiesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
@@ -26,6 +28,9 @@ class CityViewModel @Inject constructor(
     private val _state = MutableStateFlow(CityUiState())
     val state = _state.asStateFlow()
 
+    private val _event = MutableSharedFlow<CityUiEvent>()
+    val event = _event.asSharedFlow()
+
     val query = MutableStateFlow("")
 
 
@@ -43,25 +48,23 @@ class CityViewModel @Inject constructor(
                             it.copy(cities = it.cities) }
                     }
                 }
-            Log.d(TAG, "query: $query")
         }
     }
 
     private fun filterCities(query: String) {
-        viewModelScope.launch {
             val filteredCities = filterCitiesUseCase(query)
             _state.update {
-                it.copy(cities = filteredCities)
+                it.copy(cities = filteredCities, isLoading = false)
             }
             Log.d(TAG, "getCityFilter: ${filteredCities.size}")
-        }
     }
 
     private fun getCities() {
+        _state.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             val sortedCities = sortedAlphabeticalCitiesUseCase()
                 _state.update {
-                    it.copy(cities = sortedCities)
+                    it.copy(cities = sortedCities, isLoading = false)
                 }
             Log.d(TAG, "getCity: ${sortedCities.size}")
         }
@@ -71,7 +74,10 @@ class CityViewModel @Inject constructor(
         private const val TAG = "CityViewModel"
     }
 
+
     override fun onClickItem(city: City) {
-        TODO("Not yet implemented")
+        viewModelScope.launch {
+            _event.emit(CityUiEvent.ClickOpenMapEvent(city))
+        }
     }
 }
