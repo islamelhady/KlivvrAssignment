@@ -4,5 +4,8 @@ import com.elhady.klivvr.domain.model.City
 
 
 data class CityUiState(
-    val cities: List<City> = emptyList()
+    val cities: List<City> = emptyList(),
+    val isLoading: Boolean = false,
+    val errorMessages: List<String> = emptyList(),
+
 )

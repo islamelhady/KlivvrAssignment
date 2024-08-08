@@ -29,6 +29,7 @@
             android:inputType="text"
             android:paddingStart="12dp"
             android:paddingEnd="74dp"
+            android:text="@={viewModel.query}"
             android:textColor="@color/black"
             app:drawableTint="@color/design_default_color_primary"
             app:layout_constraintEnd_toStartOf="@+id/recycler_city"
