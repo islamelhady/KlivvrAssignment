@@ -10,6 +10,10 @@ class SortedAlphabeticalCitiesUseCase @Inject constructor(private val citiesRepo
          * The requirements says that the list should be sorted alphabetically,
          * city name then country, and case is insensitive.
          */
-        return citiesRepository.getCities().sortedWith(compareBy<City> { it.name.lowercase() }.thenBy { it.country.lowercase() })
+//        return citiesRepository.getCities().sortedWith(compareBy<City> { it.name.lowercase() }.thenBy { it.country.lowercase() })
+        val cities = citiesRepository.getCities()
+        citiesRepository.initTrieCities(cities)
+        return cities.sortedWith(compareBy({ it.name.lowercase() }, { it.country.lowercase() }))
     }
+
 }
