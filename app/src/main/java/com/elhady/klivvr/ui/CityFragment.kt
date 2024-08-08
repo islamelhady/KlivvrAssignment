@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import com.elhady.klivvr.R
 import com.elhady.klivvr.databinding.FragmentCityBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CityFragment : Fragment() {
     private lateinit var binding: FragmentCityBinding
+    private lateinit var adapter: CityAdapter
     private val viewModel: CityViewModel by viewModels()
 
     override fun onCreateView(
@@ -23,6 +22,8 @@ class CityFragment : Fragment() {
         binding = FragmentCityBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        adapter = CityAdapter(mutableListOf(), viewModel)
+        binding.recyclerCity.adapter = adapter
         return binding.root
 
     }

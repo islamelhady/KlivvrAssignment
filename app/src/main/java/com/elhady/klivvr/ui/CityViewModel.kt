@@ -3,6 +3,7 @@ package com.elhady.klivvr.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.elhady.klivvr.domain.model.City
 import com.elhady.klivvr.domain.usecase.SortedAlphabeticalCitiesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CityViewModel @Inject constructor(private val sortedAlphabeticalCitiesUseCase: SortedAlphabeticalCitiesUseCase): ViewModel() {
+class CityViewModel @Inject constructor(private val sortedAlphabeticalCitiesUseCase: SortedAlphabeticalCitiesUseCase): ViewModel() , CityInteractionListener{
 
     private val _state = MutableStateFlow(CityUiState())
     val state = _state.asStateFlow()
@@ -32,5 +33,9 @@ class CityViewModel @Inject constructor(private val sortedAlphabeticalCitiesUseC
     }
     companion object{
         private const val TAG = "CityViewModel"
+    }
+
+    override fun onClickItem(city: City) {
+        TODO("Not yet implemented")
     }
 }

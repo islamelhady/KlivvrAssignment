@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.elhady.klivvr.domain.model.City" />
+
+        <variable
+            name="listener"
+            type="com.elhady.klivvr.ui.CityInteractionListener" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="@{() -> listener.onClickItem(item)}"
+        android:layout_marginHorizontal="16dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{item.name}"
+                tools:text="Cairo"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.country}"
+                tools:text="EG"
+                android:layout_marginStart="16dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/city"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/lat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{String.valueOf(item.coord.lat)}'
+                tools:text="lat"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/city"
+                app:layout_constraintTop_toBottomOf="@+id/city" />
+
+            <TextView
+                android:id="@+id/lon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text='@{String.valueOf(item.coord.lon)}'
+                tools:text="lon"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/lat"
+                app:layout_constraintTop_toTopOf="@+id/lat" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
