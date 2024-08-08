@@ -14,20 +14,51 @@
         android:layout_height="match_parent"
         tools:context=".ui.CityFragment">
 
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/edittext_search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/white"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="12dp"
+            android:hint="@string/search_hint"
+            android:imeOptions="flagNoFullscreen"
+            android:inputType="text"
+            android:paddingStart="12dp"
+            android:paddingEnd="74dp"
+            android:textColor="@color/black"
+            app:drawableTint="@color/design_default_color_primary"
+            app:layout_constraintEnd_toStartOf="@+id/recycler_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/linear_progress_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:indeterminate="true"
+            app:indeterminateAnimationType="disjoint"
+            app:indicatorColor="@color/design_default_color_primary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edittext_search" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_city"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
             app:items="@{viewModel.state.cities}"
-            app:hideWhenEmpty="@{viewModel.state.cities}"
-            android:visibility="gone"
             tools:listitem="@layout/item_city"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/linear_progress_indicator"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
