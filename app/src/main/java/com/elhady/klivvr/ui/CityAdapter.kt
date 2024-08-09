@@ -1,5 +1,6 @@
 package com.elhady.klivvr.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,11 @@ class CityAdapter(private var list: List<City>, private val listener: CityIntera
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(newList: List<City>) {
 //        val diffUtil = DiffUtil.calculateDiff(CityDiffUtil(list, newList))
         list = newList
+        notifyDataSetChanged()
 //        diffUtil.dispatchUpdatesTo(this)
     }
 

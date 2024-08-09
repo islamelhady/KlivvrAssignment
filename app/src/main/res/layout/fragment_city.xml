@@ -29,7 +29,7 @@
             android:inputType="text"
             android:paddingStart="12dp"
             android:paddingEnd="74dp"
-            android:text="@={viewModel.query}"
+            android:text="@={viewModel.state.query}"
             android:textColor="@color/black"
             app:drawableTint="@color/design_default_color_primary"
             app:layout_constraintEnd_toStartOf="@+id/recycler_city"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:indeterminate="true"
-            app:isVisible="@{viewModel.state.isLoading}"
+            app:isVisible="@{viewModel.state.loading}"
             app:indeterminateAnimationType="disjoint"
             app:indicatorColor="@color/design_default_color_primary"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +61,31 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linear_progress_indicator"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NO DATA FOUND"
+            android:textSize="33sp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            app:showWhenListEmpty="@{viewModel.state.cities}"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+<!--        <ProgressBar-->
+<!--            android:id="@+id/progressBar"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:isVisible="@{viewModel.state.loading}"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

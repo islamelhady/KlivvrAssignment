@@ -1,6 +1,7 @@
 package com.elhady.klivvr.util
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.elhady.klivvr.domain.model.City
@@ -18,5 +19,18 @@ fun View.isVisibleOrGone(isVisible: Boolean?) {
         this.visibility = View.VISIBLE
     } else {
         this.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("app:showWhenListEmpty")
+fun showWhenListEmpty(view: View, list: List<City>) {
+    view.isVisible = list.isEmpty() == true
+}
+
+
+@BindingAdapter("app:hideWhenListIsEmpty")
+fun <T> hideWhenListIsEmpty(view: View, list: List<T>?) {
+    if (list?.isEmpty() == true) {
+        view.visibility = View.INVISIBLE
     }
 }
