@@ -13,8 +13,8 @@ This project is designed to efficiently filter and display a list of cities base
 - **Language**: Kotlin
 - **Architecture**: Model-View-ViewModel (MVVM)
 - **Data Structures**: Trie
-- **Dependency Injection**: [Dagger/Hilt] (or any DI framework used)
-- **Serialization**: [Gson/Moshi] (or the serialization library used)
+- **Dependency Injection**: [Dagger/Hilt]
+- **Serialization**: [Serialization library]
 
 ## Architectural Decisions
 
