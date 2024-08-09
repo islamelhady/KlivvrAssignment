@@ -11,19 +11,19 @@ This project is designed to efficiently filter and display a list of cities base
 
 ## Technology Stack
 - **Language**: Kotlin
-- **Architecture**: Model-View-ViewModel (MVVM)
+- **Architecture**: Model-View-Intent (MVI)
 - **Data Structures**: Trie
 - **Dependency Injection**: [Dagger/Hilt]
 - **Serialization**: [Serialization library]
 
 ## Architectural Decisions
 
-### MVVM Architecture
-I chose the MVVM pattern to separate concerns and ensure maintainability and scalability. This architecture allows the ViewModel to handle all business logic and UI-related data, keeping the UI layer (View) as simple as possible. This separation also facilitates testing and future modifications.
+### MVI Architecture
+I chose the MVI pattern to ensure unidirectional data flow and a predictable state management approach. This architecture makes the app more robust and easier to debug and test by using a single source of truth for the UI state.
 
 - **Model**: Represents the data and the business logic.
-- **ViewModel**: Manages UI-related data and handles user input. Uses `MutableStateFlow` and `SharedFlow` to manage state and events.
-- **View**: Displays the data and handles user interactions.
+- **View**: Displays the data and sends user interactions to the ViewModel.
+- **Intent**: Encapsulates user actions or events and drives the business logic. Intents trigger actions in the ViewModel, which produces new states for the View to render.
 
 ### Trie Data Structure
 To efficiently filter cities based on the prefix, I used a Trie (prefix tree). A Trie allows for faster lookups, making it an optimal choice for this use case where the goal is to have time efficiency better than linear.
@@ -43,7 +43,7 @@ The domain layer contains the business logic and is independent of the other lay
 
 ## Additional Notes
 - **Screen Rotation**: The app supports screen rotation, maintaining the state and current filter.
-- **Code Comments**: I have added comments in the code to explain key decisions and optimizations, particularly around the use of the Trie and MVVM architecture.
+- **Code Comments**: I have added comments in the code to explain key decisions and optimizations, particularly around the use of the Trie and MVI architecture.
 
 ## How to Run
 1. Clone the repository.
@@ -51,4 +51,4 @@ The domain layer contains the business logic and is independent of the other lay
 3. Build and run the app on an emulator or device running Android 5.0+.
 
 ## Conclusion
-This project showcases the use of efficient algorithms and modern Android architecture patterns to create a responsive and maintainable app. By using a Trie for prefix filtering and MVVM for architecture, the app is both performant and easy to extend.
+This project showcases the use of efficient algorithms and modern Android architecture patterns to create a responsive and maintainable app. By using a Trie for prefix filtering and MVI for architecture, the app is both performant and easy to extend.
